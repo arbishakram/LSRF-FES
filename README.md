@@ -12,22 +12,22 @@ This repository provides the official implementation of the following paper:
 ## Test with Pretrained Models
 Test with the LSRF model when F=1
 ```
-python main.py --inthewild_dataset_dir ./imgs/  --weights_dir ./pre_trained_models/ --model LSRF --image_size 128   \
+python main.py --inthewild_dataset_dir ./testing_imgs/  --weights_dir ./pre_trained_models/ --model LSRF --image_size 128   \
                --f 1  --mode test_inthewild --results_dir ./results/                               
 ```
 Test with the OMP model when F=1
 ```
-python main.py --inthewild_dataset_dir ./imgs/ --weights_dir ./pre_trained_models/ --model OMP --image_size 128   \
+python main.py --inthewild_dataset_dir ./testing_imgs/ --weights_dir ./pre_trained_models/ --model OMP --image_size 128   \
                --f 1  --mode test_inthewild --results_dir ./results/                               
 ```
 Test with the LSRF model when F=5
 ```
-python main.py --inthewild_dataset_dir ./imgs/ --weights_dir ./pre_trained_models/ --model LSRF --image_size 80   \
+python main.py --inthewild_dataset_dir ./testing_imgs/ --weights_dir ./pre_trained_models/ --model LSRF --image_size 80   \
                --f 5  --mode test_inthewild --results_dir ./results/                               
 ```
 Test with the OMP model when F=5
 ```
-python main.py --inthewild_dataset_dir ./imgs/ --weights_dir ./pre_trained_models/ --model OMP --image_size 80   \
+python main.py --inthewild_dataset_dir ./testing_imgs/ --weights_dir ./pre_trained_models/ --model OMP --image_size 80   \
                --f 5  --mode test_inthewild --results_dir ./results/                               
 ```
 
