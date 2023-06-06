@@ -20,15 +20,15 @@ Test with the OMP model when F=1
 python main.py --inthewild_dataset_dir ./imgs/ --weights_dir ./pre_trained_models/ --model OMP --image_size 128   \
                --f 1  --mode test_inthewild --results_dir ./results/                               
 ```
-Test with the LSRF model when F=9
+Test with the LSRF model when F=5
 ```
 python main.py --inthewild_dataset_dir ./imgs/ --weights_dir ./pre_trained_models/ --model LSRF --image_size 80   \
-               --f 9  --mode test_inthewild --results_dir ./results/                               
+               --f 5  --mode test_inthewild --results_dir ./results/                               
 ```
-Test with the OMP model when F=9
+Test with the OMP model when F=5
 ```
 python main.py --inthewild_dataset_dir ./imgs/ --weights_dir ./pre_trained_models/ --model OMP --image_size 80   \
-               --f 9  --mode test_inthewild --results_dir ./results/                               
+               --f 5  --mode test_inthewild --results_dir ./results/                               
 ```
 
 ## Train the Model
