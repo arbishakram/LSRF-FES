@@ -4,14 +4,14 @@ from solver import *
 import time
 
 start = time.time()
-exp_name = 'ijcv_paper/17_MAY_2023/Exp_N2HAS_128_omp_k_1/'
-dataset_path = 'C:/Users/doctor/Desktop/attpaper/dataset/N2HAS/'
-pos = 'C:/Users/doctor/Desktop/lsrf-revision/quant/original/'
+exp_name = 'Exp_N2HAS_128_omp_k_1/'
+dataset_path = './dataset/N2HAS/'
+inthewild_path = ''
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--train_dataset_dir', dest='train_dataset_dir', default=dataset_path+'train/', help='path of the train dataset')
 parser.add_argument('--val_dataset_dir', dest='val_dataset_dir', default=dataset_path+'val/', help='path of the validation dataset')
-parser.add_argument('--test_dataset_dir', dest='test_dataset_dir', default=pos+'imgs/', help='path of the inthewild test dataset')
+parser.add_argument('--test_dataset_dir', dest='test_dataset_dir', default=inthewild_path+'imgs/', help='path of the inthewild test dataset')
 parser.add_argument('--image_size', dest='image_size', type=int, default=50, help='size of image')
 parser.add_argument('--input_ch', dest='input_ch', type=int, default=3, help='# of input image channels')
 parser.add_argument('--lamda', dest='lamda', type=float, default=0.4, help='lambda value')
