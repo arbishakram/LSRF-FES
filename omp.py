@@ -63,6 +63,6 @@ def omp(self, M1, M2):
               W[ii, ind[0]] = ind[1]   
 
      W = sparse.csr_matrix(W)
-     sparse.save_npz(str(self.weight_dir)+'omp_weights_dec-2021_'+str(self.f)+'.npz', W)
+     sparse.save_npz(str(self.weight_dir)+'omp_weights_N2HAS_f'+str(self.f)+'_img-size_'+str(self.size)+'.npz', W)
      return W    
 
