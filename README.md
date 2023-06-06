@@ -1,4 +1,5 @@
-# LSRF: Localized and Sparse Receptive Fields for Linear Facial Expression Synthesis based on Global Face Context
+# LSRF: Localized and Sparse Receptive Fields for Linear Facial Expression Synthesis based on Global Face Context 
+In: Multimedia Tools and Applications (MTAP) Under Review (2023)
 
 <p align="center"><img width="50%" src="imgs/main.png" /></p>
 
