@@ -153,4 +153,4 @@ def omp_with_locality_constraint(self,  Mk, M1, M2):
         
  
      Wt = sparse.csr_matrix(W)         
-     sparse.save_npz(str(self.weight_dir)+'lsrf_weights_dec-2021_'+str(self.f)+'.npz', Wt)   
+     sparse.save_npz(str(self.weight_dir)+'lsrf_weights_N2HAS_f-'+str(self.f)+'_img-size_'+str(self.size)+'.npz', Wt)   
