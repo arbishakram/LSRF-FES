@@ -86,6 +86,6 @@ class omp_solver:
                  xn = cv2.normalize(xn, None, 0,255, cv2.NORM_MINMAX, cv2.CV_8UC1)                  
                  ftest = np.concatenate((xn,ynt), axis=1) 
                  cv2.imwrite(str(args.results_dir)+str(self.names[p])+'_y_1_test.png',ynt)
-                 print(p,'Saved input and output images into {}'.format(args.results_dir))
+                 print(p,'Saved images into {}'.format(args.results_dir))
 
                  
