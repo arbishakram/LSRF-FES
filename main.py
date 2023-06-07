@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb 25 23:46:46 2022
+
+@author: arbish
+"""
+
 import argparse
 import os
 from solver import *
@@ -12,7 +20,7 @@ parser = argparse.ArgumentParser(description='')
 parser.add_argument('--train_dataset_dir', dest='train_dataset_dir', default=dataset_path+'train/', help='path of the train dataset')
 parser.add_argument('--val_dataset_dir', dest='val_dataset_dir', default=dataset_path+'val/', help='path of the validation dataset')
 parser.add_argument('--test_dataset_dir', dest='test_dataset_dir', default=inthewild_path+'imgs/', help='path of the inthewild test dataset')
-parser.add_argument('--image_size', dest='image_size', type=int, default=50, help='size of image')
+parser.add_argument('--image_size', dest='image_size', type=int, default=128, help='size of image')
 parser.add_argument('--input_ch', dest='input_ch', type=int, default=3, help='# of input image channels')
 parser.add_argument('--lamda', dest='lamda', type=float, default=0.4, help='lambda value')
 parser.add_argument('--beta', dest='beta', type=float, default=60, help='beta value')
