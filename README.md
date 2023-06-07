@@ -48,3 +48,9 @@ python main.py --train_dataset_dir ./train_dataset/ --weights_dir ./weights/ --m
 python main.py --train_dataset_dir ./train_dataset/ --weights_dir ./weights/ --model OMP --image_size 80   \
                --f 9  --mode train --results_dir ./results/                                
 ```
+
+## Dependencies
+* scikit-learn == 0.22
+* joblib == 1.0
+* scipy == 1.6
+* opencv-python == 4.5
