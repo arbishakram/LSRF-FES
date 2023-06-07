@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb 25 23:46:46 2022
+
+@author: arbish
+"""
+
 import os
 import glob
 import numpy as np
