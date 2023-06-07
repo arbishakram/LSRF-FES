@@ -24,22 +24,28 @@ def normalize_X(self, M1, M2):
          norm_Xtt[:,:,ch] = tXtt        
      return norm_Xtt
  
-# Initialize the locality constraint with 9-neighbors.
+# Initialize the locality constraint f=9
 def initialize_local9(self, lamd_t, Mk):
      indices = []
      length = []
      for m in range(self.image_size):   
              ind = Mk[m].indices
-             indices.append(ind)             
+             print(m, ind)
+             indices.append(ind)  
+     
      for k in range(self.image_size):              
           ind = indices[k]
+          # print(ind)
           l = len(ind)
-          lamd_t[k, 0:l, 0] = ind    
+          # print(lamd_t[k, :])
+          
+          lamd_t[k, 0:l] = ind    
           length.append(len(ind))
+         
      return lamd_t, length
           
           
-# Initialize the locality constraint with 5-neighbors.       
+# Initialize the locality constraint with f=5     
 def initialize_local5(self, lamd_t, Mk):
      indices = []
      length = []
@@ -50,42 +56,51 @@ def initialize_local5(self, lamd_t, Mk):
          ind = indices[k]   
          l = len(ind)
          if l == 4:             
-             lamd_t[k, 0:l, 0] = ind
+             lamd_t[k, 0:l] = ind
              length.append(len(ind))
          elif l == 6:
              li = len(ind[1::2])
-             lamd_t[k, 0:li, 0] = ind[1::2]  
+             lamd_t[k, 0:li] = ind[1::2]  
              length.append(len(ind[1::2]))
          else:
-             lamd_t[k, :, 0] = ind[0::2]
+             lamd_t[k, :] = ind[0::2]
              length.append(len(ind[0::2]))
      return lamd_t, length
     
     
-# Initialize the locality constraint randomly.   
-def initialize_random(self, lamd_t):
-    for k in range(self.f):
-          lamd_t[:,k,0] = random.sample(range(0, self.image_size), self.image_size)
-    return lamd_t
+# Initialize the locality constraint for f=1
+def initialize_local1(self, lamd_t, Mk):    
+     indices = []
+     length = []
+     for m in range(self.image_size):   
+             ind = Mk[m].indices
+             indices.append(ind) 
+     for k in range(self.image_size):
+         ind = indices[k] 
+         lamd_t[k, :] = ind
+         length.append(len(ind))         
+             
+     return lamd_t, length
  
-
-def omp_with_locality_constraint(self, local_neighbors, Mk, M1, M2):         
+def omp_with_locality_constraint(self,  Mk, M1, M2):         
      
      norm_Xtt = normalize_X(self, M1, M2)
      local_neighbors_list = []
      for m in range(self.image_size):   
-             ind = local_neighbors[m].indices
+             ind = Mk[m].indices
              local_neighbors_list.append(ind)   
              
                
-     lamd_t = np.zeros((self.image_size, self.f, 1))      # maximum 2
-#     lamd_t = initialize_random(self, lamd_t)
-     lamd_t, length  = initialize_local9(self,lamd_t, Mk)
+     lamd_t = np.zeros((self.image_size, self.f))    
+     lamd_t, length  = initialize_local1(self,lamd_t, Mk)  ### for F = 1 
+     # lamd_t, length  = initialize_local5(self,lamd_t, Mk)  ### for F = 5
+     # lamd_t, length  = initialize_local9(self,lamd_t, Mk)  ### for F = 9 
+     
 
-     for tau in range(1):
-        W = np.zeros((self.image_size, self.size_n))                 
-        def compute_wi(k):
-#        for k in range(self.image_size): 
+
+     W = np.zeros((self.image_size, self.size_n))                 
+     def compute_wi(k):
+     # for k in range(self.image_size): 
                   print(k)
                   tk = M2[:, k, :]
                   r =  tk                   
@@ -102,15 +117,11 @@ def omp_with_locality_constraint(self, local_neighbors, Mk, M1, M2):
                           jloc = np.array(np.unravel_index(j, (self.size, self.size)))                                              
                           dist = 0
                           
-                          ### compute spatial similarity 
+                          ### compute spatial similarity   
                           for idx, m in enumerate(local_neighbors_list[k]):
                               distn = []
-                              mind = lamd_t[m, :, tau-1]
-                              if tau == 1:
-                                  F = length[k]
-                              else:
-                                  F = self.f
-                              for p in range(F):                                  
+                              mind = lamd_t[m, :]   
+                              for p in range(self.f):                                  
                                   ploc = np.array(np.unravel_index(int(mind[p]), (self.size, self.size)))
                                   distn.append(np.linalg.norm(ploc - jloc))
                               dist += min(distn)  
@@ -133,16 +144,13 @@ def omp_with_locality_constraint(self, local_neighbors, Mk, M1, M2):
                       r = np.squeeze(tk - temp.dot(M1[:, indt, :])) 
                   return (indt, temp)
 
-        data = Parallel(n_jobs=20)(delayed(compute_wi)(k) for k in range(self.image_size))
+     data = Parallel(n_jobs=20)(delayed(compute_wi)(k) for k in range(self.image_size))
                 
-        for k in range(len(data)):
-             ind = data[k]  
-             print("***k", ind[0])                                
-             W[k, ind[0]] = ind[1] 
-            
+     for k in range(len(data)):
+         ind = data[k]  
+         print("***k",k,  ind[0])                                
+         W[k, ind[0]] = ind[1] 
+        
  
-        Wt = sparse.csr_matrix(W)         
-        sparse.save_npz(str(self.weight_dir)+'lsrf_weights_N2HAS_f'+str(self.f)+'_img-size_'+str(self.size)+'.npz', Wt)
-
-         
-    
+     Wt = sparse.csr_matrix(W)         
+     sparse.save_npz(str(self.weight_dir)+'lsrf_weights_dec-2021_'+str(self.f)+'.npz', Wt)   
