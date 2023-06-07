@@ -26,7 +26,7 @@ def load_data(self, args, in_path, mod):
          
             
              if args.mode == 'test_inthewild':                 
-                 in_path = args.inthewild_dataset_dir
+                 in_path = args.test_dataset_dir
                  imgA=glob.glob(os.path.join(in_path, '*.jpg'))
                  imgA=natsort.natsorted(imgA)
                  print('Number of images in '+str(args.mode)+':',len(imgA))                 
