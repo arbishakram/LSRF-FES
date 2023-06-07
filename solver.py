@@ -69,7 +69,7 @@ class omp_solver:
              for p in range(self.n):
                  xn = np.zeros((self.size,self.size,self.ch))   
                  ynt = np.zeros((self.size,self.size,self.ch))
-                 Wt = sparse.load_npz(str(args.weights_dir)+'omp_weights_N2HAS_f'+str(self.f)+'_img-size_'+str(self.size)+'.npz') 
+                 Wt = sparse.load_npz(str(args.weights_dir)+'omp_weights_N2HAS_f-'+str(self.f)+'_img-size_'+str(self.size)+'.npz') 
                  Wt = Wt.todense()
                  for ch in range(self.ch):       
                         x = load_x(self, p,ch)                          
