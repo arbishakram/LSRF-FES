@@ -42,7 +42,7 @@ class omp_solver:
          print(train_imagesA.shape, train_imagesB.shape)
         
          
-         local_neighbors, Mk = create_mask(args)
+         Mk = create_mask(args)
          
          for ch in range(1):
              print("form design and repsonse matrices.... ")
@@ -52,7 +52,7 @@ class omp_solver:
              print("learn MR weights....")
              
              if self.model_name == 'LSRF':
-                 W =  omp_with_locality_constraint(self, local_neighbors, Mk, train_M1, train_M2)
+                 W =  omp_with_locality_constraint(self, Mk, train_M1, train_M2)
              elif self.model_name == 'OMP':
                  W =  omp(self, train_M1, train_M2)  
              else:
