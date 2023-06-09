@@ -10,7 +10,7 @@ import numpy as np
 from scipy import sparse
 
 def create_mask(args):
-        f = np.sqrt(args.f) # 8-neighborhood pixels
+        f = np.sqrt(args.f) 
         img_size = args.image_size
         d = img_size* img_size
         size_n = d+1
